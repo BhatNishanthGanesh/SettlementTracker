@@ -48,10 +48,9 @@ const ToPaySummary = () => {
       <div className="mt-8 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {toPaySummary.length > 0 &&
           toPaySummary.map((item: any, index) => (
-            <div key={index} className="bg-white dark:bg-medium rounded-md  text-center h-64 w-64 shadow-md p-4">
+            <div key={index} className="bg-white dark:bg-medium rounded-md  text-center  shadow-md p-24">
               <h3 className="text-2xl  font-semibold mb-6">{item.name}</h3>
-              <h1>🤪</h1>
-              <p className='text-2xl'>
+              <p className='text-1xl'>
                 <span className=''>To pay:</span> {Math.abs(item.totalDues)}
               </p>
             </div>

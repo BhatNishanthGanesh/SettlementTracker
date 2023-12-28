@@ -9,6 +9,7 @@ import { useState } from 'react';
 const AuthButton = () => {
   const { data: session } = useSession();
   const [showDropdown, setShowDropdown] = useState(false);
+  
   const router = useRouter();
 
   const handleAvatarClick = () => {
@@ -27,7 +28,7 @@ const AuthButton = () => {
   return (
     <div className="flex items-center">
       {session?.user?.image ? (
-        <div className="relative">
+        <div className="flex">
           <button onClick={handleAvatarClick} className="focus:outline-none">
             <img
               src={session.user.image}
@@ -35,8 +36,12 @@ const AuthButton = () => {
               className="w-8 mb-2 h-8 rounded-full mr-2 cursor-pointer"
             />
           </button>
+          <span className='dark:text-white'>
+          {session.user.name}
+          </span>
+
           {showDropdown && (
-            <div className="absolute top-10 right-0 bg-white shadow-md rounded-md p-2">
+            <div className="absolute mt-10 bg-white shadow-md rounded-md p-2">
               <button onClick={handleSignOut} className="w-full text-left">
                 Sign out
               </button>
@@ -57,7 +62,9 @@ const AuthButton = () => {
 
 const Navbar = () => {
   const path = usePathname();
-
+  const { data: session } = useSession();
+  const [showMenu, setShowMenu] = useState(false);
+  const [showBlackHalfWidth, setShowBlackHalfWidth] = useState(false);
   const Links = [
     {
       label: 'Home',
@@ -80,58 +87,72 @@ const Navbar = () => {
       icon: CreditCard
     },
     {
-      label: 'Calculator',
-      href: '/api/auth/signin',
+      label: 'calculator',
+      href: '/calculator',
       icon: User,
     },
   ]
-
-  return (
-    <div className="first-letter:shadow-lg rounded p-2   dark:medium  ml-4 mr-4 ">
-      <ul className="flex justify-between">
-        <div className="flex items-center ">
-          {Links.slice(0, 5).map((link, index) => (
-            <li key={index} className="mr-6 ">
-              <Link href={link.href}>
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+    setShowBlackHalfWidth(!showBlackHalfWidth);
+  };
+   return (
+    <div className="flex ">
+      <div className="flex-grow ">
+        <div className="">
+          <div className="lg:hidden">
+            <button onClick={toggleMenu} className="text-white p-3 focus:outline-none">
+              {/* Hamburger menu icon */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {showMenu ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                )}
+              </svg>
+            </button>
+          </div>
+          <div className={`lg:flex ${showMenu ? 'block' : 'hidden'}`}>
+            {Links.filter((link) => !session || (link.label !== 'Expense Tracker')).map((link, index) => (
+              <Link key={index} href={link.href}>
                 <span
-                  className={`cursor-pointer dark:text-white text-black  ${
-                    path === link.href ? 'font-bold' : ''
-                  }`}
+                  className={`cursor-pointer dark:text-white text-black ${path === link.href ? 'font-bold' : ''}`}
                 >
-                  <div className="flex items-center">
+                  <div className={`flex dark:bg-dark rounded p-2 m-2 items-center ${path === link.href ? '' : 'shadow-lg'}`}>
                     <link.icon className="inline-block h-5 w-5 hover:animate-pulse" />
-                    <span className="ml-1 text-1xl p-1 m-2">{link.label}</span>
+                    <span className="ml-1 text-1xl m-2">{link.label}</span>
                   </div>
                 </span>
               </Link>
-            </li>
-          ))}
-        </div>
-        {/* <div className="flex mt-4"> */}
-        {/* <div className='mb-2 mr-3'>
-              <ThemeToggle />
-          </div> */}
-          {/* <AuthButton />  */}
-          {/* <Link href={Links[4].href}>
-            <span
-              className={`cursor-pointer  dark:text-white text-black ${
-                path === Links[4].href ? 'font-bold' : ''
-              }`}
-            >
-              <div className="flex items-center">
-                <User className="inline-block mr-2 h-5 w-5  hover:animate-bounce" />
-                <span className="mr-4 text-1xl">{Links[4].label}</span>
-              </div>
-            </span>
-          </Link> */}
-        {/* </div> */}
-        <div className="flex items-center mt-4"> {/* Updated to use items-center */}
-          <div className='mb-2 mr-3'>
-            <ThemeToggle />
+            ))}
+            {session && (
+              <Link href="/expense">
+                <span
+                  className={`cursor-pointer dark:text-white text-black ${path === '/expense' ? 'font-bold' : ''}`}
+                >
+                  <div className={`flex dark:bg-dark rounded p-2 m-2 items-center ${path === '/expense' ? '' : 'shadow-lg'}`}>
+                    <User className="inline-block h-5 w-5 hover:animate-pulse" />
+                    <span className="ml-1 text-1xl m-2">Expense Tracker</span>
+                  </div>
+                </span>
+              </Link>
+            )}
           </div>
-          <AuthButton /> 
         </div>
-      </ul>
+        {/* <div className={`fixed inset-y-0 left-0 z-40 bg-gray-900 w-1/2 shadow-lg transition-transform duration-300 transform lg:bg-transparent lg:shadow-none lg:w-auto ${showBlackHalfWidth ? 'translate-x-0' : '-translate-x-full'}`}></div> */}
+      </div>
+      <div className="flex   items-center mt-4">
+        <div className="mb-2 mr-3">
+          <ThemeToggle />
+        </div>
+        <AuthButton />
+      </div>
     </div>
   );
 };

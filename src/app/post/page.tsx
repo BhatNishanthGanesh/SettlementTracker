@@ -63,7 +63,7 @@ const PostComponent = () => {
   };
 
   return (
-    <div className="flex justify-center dark:bg-dark bg-gray-200 items-center h-screen">
+    <div className="flex justify-center  dark:bg-dark bg-gray-200 items-center h-screen">
     <div className="max-w-md mx-auto ">
       <form onSubmit={handleSubmit} className="bg-white dark:bg-medium  shadow-md rounded px-8 pt-6 pb-6 mb-4">
         <div className="mb-4">

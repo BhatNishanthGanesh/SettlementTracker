@@ -48,8 +48,8 @@ const OwesSummary = () => {
       <div className="mt-8 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {filteredDuesSummary.length > 0 &&
           filteredDuesSummary.map((item: any, index) => (
-            <div key={index} className="bg-white dark:bg-medium rounded-md shadow-md p-4">
-              <h3 className="text-lg font-semibold mb-2">{item.name}</h3>
+            <div key={index} className="bg-white dark:bg-medium p-24 rounded-md shadow-md ">
+              <h1 className="text-4xl  font-semibold mb-2">{item.name}</h1>
               <p>Owes: {Math.abs(item.totalDues)}</p>
             </div>
           ))}
@@ -58,7 +58,7 @@ const OwesSummary = () => {
   };
 
   return (
-    <div className="flex flex-col dark:bg-dark dark:text-white items-center justify-center p-8 bg-gray-100">
+    <div className="flex flex-col dark:bg-dark mt-4 dark:text-white items-center justify-center p-8 bg-gray-100">
       <h1 className="text-4xl font-bold mb-4">Owes Summary</h1>
       {renderOwesSummary()}
     </div>

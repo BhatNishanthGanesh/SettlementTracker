@@ -26,7 +26,7 @@ export default function Home() {
     const [showModal, setShowModal] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-  
+    
     const fetchData = async () => {
       try {
         const result = await getData();
@@ -189,10 +189,10 @@ export default function Home() {
     
 
   return (
-    <main className="flex  flex-col items-center justify-between p-9">
-      <h1 className="text-4xl mb-4 dark:text-white font-bold">Expense Tracker</h1>
-      <div className="flex items-center mb-4">
-        <button className="bg-red-500 m-2 p-2 rounded font-bold">
+    <main className="items-center justify-between p-9">
+      <h1 className="text-4xl mb-4 text-center dark:text-white font-bold">Settlement Tracker</h1>
+      <div className="flex justify-center items-center mb-4">
+        <button className="bg-red-500 shadow-lg m-2 p-2 rounded font-bold">
           <Link href="/post">Add new Data</Link>
         </button>
         <input
@@ -200,19 +200,22 @@ export default function Home() {
           placeholder="Search by Name"
           value={searchQuery}
           onChange={handleSearch}
-          className="border rounded-md p-2"
+          className="border rounded-md p-2 shadow-lg"
         />
       </div>
-      <table className="mt-8 border-collapse border w-full shadow-lg">
+      <div className='overflow-auto'>
+
+      <table className="mt-8 border-collapse border min-w-full shadow-lg">
         <thead>
           <tr className="bg-gray-200 dark:bg-gray-700 dark:text-white">
-            <th className="border p-2">Name</th>
+            <th className="border p-2 ">Name</th>
             <th className="border p-2">Expense</th>
             <th className="border p-2">Spent</th>
             <th className="border p-2">Received</th>
             <th className="border">Edit</th>
             <th className="border">Remove</th>
-            <th className="border p-2">Created At</th>
+            <th className="border p-2 ">Created At</th>
+            <th className='border p-2'></th>
           </tr>
         </thead>
         <tbody>
@@ -236,6 +239,8 @@ export default function Home() {
           ))}
         </tbody>
       </table>
+      </div>
+     
       {selectedItems.length > 0 && (
         <div className="mt-4">
           <button onClick={deleteSelectedItems} className="bg-red-500 text-white px-4 py-2 rounded-md">
