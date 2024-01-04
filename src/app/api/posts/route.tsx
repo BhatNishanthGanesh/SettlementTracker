@@ -1,5 +1,5 @@
 import prisma from '@/app/libs/db'
-import { NextResponse } from 'next/server'
+import { NextResponse,NextRequest } from 'next/server'
 
 
 export const POST = async(request:Request)=>{
@@ -30,3 +30,4 @@ export const GET = async()=>{
     }
 
 }
+

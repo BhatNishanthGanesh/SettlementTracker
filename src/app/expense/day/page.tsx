@@ -11,9 +11,9 @@ const ExpenseCard = ({ date }: any) => {
   });
 
   return (
-    <Link href={`/expense/daily/${date}`}>
-      <div className="w-48 mx-4 my-4">
-        <div className="bg-white shadow-md rounded-md transition duration-300 hover:shadow-lg">
+    <Link href={`/expense/day/${date}`}>
+      <div className="w-96 mx-4 my-4">
+        <div className="bg-white  shadow-md rounded-md transition duration-300 hover:shadow-lg">
           <div className="p-4">
             <h3 className="text-lg font-semibold">{formattedDate}</h3>
           </div>

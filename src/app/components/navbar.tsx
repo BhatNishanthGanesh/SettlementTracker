@@ -124,7 +124,7 @@ const Navbar = () => {
                 <span
                   className={`cursor-pointer dark:text-white text-black ${path === link.href ? 'font-bold' : ''}`}
                 >
-                  <div className={`flex dark:bg-dark rounded p-2 m-2 items-center ${path === link.href ? '' : 'shadow-lg'}`}>
+                  <div className={`flex dark:bg-medium rounded p-2 m-2 items-center ${path === link.href ? '' : 'shadow-2xl'}`}>
                     <link.icon className="inline-block h-5 w-5 hover:animate-pulse" />
                     <span className="ml-1 text-1xl m-2">{link.label}</span>
                   </div>
@@ -136,7 +136,7 @@ const Navbar = () => {
                 <span
                   className={`cursor-pointer dark:text-white text-black ${path === '/expense' ? 'font-bold' : ''}`}
                 >
-                  <div className={`flex dark:bg-dark rounded p-2 m-2 items-center ${path === '/expense' ? '' : 'shadow-lg'}`}>
+                  <div className={`flex dark:bg-medium  rounded p-2 m-2 items-center ${path === '/expense' ? '' : 'shadow-2xl'}`}>
                     <User className="inline-block h-5 w-5 hover:animate-pulse" />
                     <span className="ml-1 text-1xl m-2">Expense Tracker</span>
                   </div>
