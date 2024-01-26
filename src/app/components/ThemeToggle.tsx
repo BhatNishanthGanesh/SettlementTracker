@@ -4,11 +4,11 @@ import { useEffect, useState } from "react"
 import { Moon, Sun } from "react-feather"
 
 const ThemeToggle = () => {
-    const [darkMode,setdarkMode]=useState(true)
+    const [darkMode,setdarkMode]=useState(false)
     useEffect(()=>{
         const theme=localStorage.getItem("theme")
         if(theme==="dark"){
-            setdarkMode(true)
+            setdarkMode(false)
         }
     },[])
     useEffect(()=>{

@@ -42,6 +42,7 @@ const ExpensePage = () => {
       setCardDates(updatedDates);
     } else {
       console.log('Expense for this date already exists');
+      alert('You can create expense once in a day.')
     }
   };
 

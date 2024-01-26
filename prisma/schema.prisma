@@ -28,3 +28,11 @@ model Expense{
    createdAt DateTime @default(now())
    updatedAt DateTime @updatedAt 
 }
+
+model Register {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  email String @unique
+  password String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt 
+}

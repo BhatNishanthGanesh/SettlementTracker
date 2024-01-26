@@ -4,10 +4,13 @@ import { usePathname,useRouter } from 'next/navigation';
 import { Home, User, DollarSign, CreditCard } from 'react-feather';
 import { signIn, signOut, useSession } from 'next-auth/react'; 
 import ThemeToggle from './ThemeToggle';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 const AuthButton = () => {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  // @ts-ignore
+  const { data: session, status, isFetching } = useSession();
+  
   const [showDropdown, setShowDropdown] = useState(false);
   
   const router = useRouter();
@@ -18,16 +21,29 @@ const AuthButton = () => {
     } else {
       router.push('/api/auth/signin');
     }
+
   };
 
-  const handleSignOut = () => {
-    signOut();
+  const handleSignOut = async() => {
+    // signOut();
+    await signOut({ callbackUrl: '/' });
     setShowDropdown(false);
   };
+  useEffect(() => {
+    // If the session is being fetched, do not show the avatar
+    if (isFetching) {
+      setShowDropdown(false);
+    }
+  }, [isFetching]);
+
+  if (status === 'loading') {
+    // Render nothing while the session is being fetched
+    return null;
+  }
 
   return (
     <div className="flex items-center">
-      {session?.user?.image ? (
+      {session?.user?.image && !isFetching ? (
         <div className="flex">
           <button onClick={handleAvatarClick} className="focus:outline-none">
             <img
@@ -62,7 +78,7 @@ const AuthButton = () => {
 
 const Navbar = () => {
   const path = usePathname();
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   const [showMenu, setShowMenu] = useState(false);
   const [showBlackHalfWidth, setShowBlackHalfWidth] = useState(false);
   const Links = [
@@ -89,6 +105,11 @@ const Navbar = () => {
     {
       label: 'calculator',
       href: '/calculator',
+      icon: User,
+    },
+    {
+      label: 'Expense Tracker',
+      href: '/expense',
       icon: User,
     },
   ]
@@ -119,19 +140,20 @@ const Navbar = () => {
             </button>
           </div>
           <div className={`lg:flex ${showMenu ? 'block' : 'hidden'}`}>
-            {Links.filter((link) => !session || (link.label !== 'Expense Tracker')).map((link, index) => (
+            {/* {Links.filter((link) => !session || (link.label !== 'Expense Tracker')).map((link, index) => ( */}
+            {Links.map((link, index) => (
               <Link key={index} href={link.href}>
                 <span
                   className={`cursor-pointer dark:text-white text-black ${path === link.href ? 'font-bold' : ''}`}
                 >
-                  <div className={`flex dark:bg-medium rounded p-2 m-2 items-center ${path === link.href ? '' : 'shadow-2xl'}`}>
+                  <div className={`flex dark:bg-medium border-4 dark:border-medium border-white rounded px-4 py-2 m-2 items-center ${path === link.href  ? '' : 'shadow-2xl'}`}>
                     <link.icon className="inline-block h-5 w-5 hover:animate-pulse" />
                     <span className="ml-1 text-1xl m-2">{link.label}</span>
                   </div>
                 </span>
               </Link>
             ))}
-            {session && (
+            {/* {session && (
               <Link href="/expense">
                 <span
                   className={`cursor-pointer dark:text-white text-black ${path === '/expense' ? 'font-bold' : ''}`}
@@ -142,12 +164,12 @@ const Navbar = () => {
                   </div>
                 </span>
               </Link>
-            )}
+            )} */}
           </div>
         </div>
         {/* <div className={`fixed inset-y-0 left-0 z-40 bg-gray-900 w-1/2 shadow-lg transition-transform duration-300 transform lg:bg-transparent lg:shadow-none lg:w-auto ${showBlackHalfWidth ? 'translate-x-0' : '-translate-x-full'}`}></div> */}
       </div>
-      <div className="flex   items-center mt-4">
+      <div className="flex  m-2  items-center mt-4">
         <div className="mb-2 mr-3">
           <ThemeToggle />
         </div>

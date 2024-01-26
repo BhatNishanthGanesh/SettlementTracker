@@ -34,3 +34,35 @@
 //         headers: { 'Content-Type': 'application/json' },
 //     });
 // }
+
+import prisma from '@/app/libs/db'
+import { NextResponse,NextRequest } from 'next/server'
+
+
+export const POST = async(request:Request)=>{
+    try{
+    const body=await request.json()
+    const {email,password}=body
+    const posts=await prisma.register.create({
+      data:{
+        email,
+        password
+      }
+    })
+    return NextResponse.json(posts)
+    }catch(err){
+        return NextResponse.json({message:"Error",err})
+    }
+  
+}
+
+export const GET = async()=>{
+    try{
+        const getpost=await prisma.register.findMany()
+        return NextResponse.json(getpost)
+    }catch(err){
+        return NextResponse.json({message:"Error",err},{status:500})
+    }
+
+}
+

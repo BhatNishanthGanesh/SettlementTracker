@@ -13,10 +13,13 @@ async function getData() {
   return res.json();
 }
 
-
+const simulateLoadingDelay = async (delay = 1000) => {
+  return new Promise(resolve => setTimeout(resolve, delay));
+}
 
 export default function Home() {
     const [data, setData] = useState([] as any[]);
+    const [loading, setLoading] = useState(true);
     const [selectedItemId, setSelectedItemId] = useState('');
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
     const [updatedName, setUpdatedName] = useState('');
@@ -29,8 +32,10 @@ export default function Home() {
     
     const fetchData = async () => {
       try {
+        await simulateLoadingDelay(); 
         const result = await getData();
         setData(result);
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -187,13 +192,26 @@ export default function Home() {
       return date.toLocaleString(); 
     };
     
-
+    const renderSkeletonLoading = () => {
+      return (
+        <tr>
+          <td className="border p-2 animate-pulse">&nbsp;</td>
+          <td className="border p-2 animate-pulse">&nbsp;</td>
+          <td className="border p-2 animate-pulse">&nbsp;</td>
+          <td className="border p-2 animate-pulse">&nbsp;</td>
+          <td className="border p-2 animate-pulse">&nbsp;</td>
+          <td className="border p-2 animate-pulse">&nbsp;</td>
+          <td className="border p-2 animate-pulse">&nbsp;</td>
+          <td className="border p-2 animate-pulse">&nbsp;</td>
+        </tr>
+      );
+    };
   return (
     <main className="items-center justify-between p-9">
       <h1 className="text-4xl mb-4 text-center dark:text-white font-bold">Settlement Tracker</h1>
       <div className="flex justify-center items-center mb-4">
         <button className="bg-red-500 shadow-lg m-2 p-2 rounded font-bold">
-          <Link href="/post">Add new Data</Link>
+          <Link href="/post">Create</Link>
         </button>
         <input
           type="text"
@@ -219,6 +237,11 @@ export default function Home() {
           </tr>
         </thead>
         <tbody>
+        {loading ? (
+              // Render skeleton loading for each row
+              // @ts-ignore
+              Array.from({ length: 5 }).map((_, index) => renderSkeletonLoading(index))
+            ) : (<>
           {filteredData.map((item:any, index) => (
             <tr className="bg-white dark:bg-medium dark:text-white text-center transition-colors hover:bg-gray-100 dark:hover:bg-gray-800" key={index}>
               <td className="border p-2">{item.name}</td>
@@ -237,6 +260,7 @@ export default function Home() {
               </td>
             </tr>
           ))}
+          </>)}
         </tbody>
       </table>
       </div>

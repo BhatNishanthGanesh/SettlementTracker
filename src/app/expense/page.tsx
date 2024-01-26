@@ -35,7 +35,7 @@ const Page = () => {
       </Link>
 
       {/* Savings Card */}
-      <Link href="/savings">
+      <Link href="/save">
         <div className="max-w-xs cursor-pointer dark:bg-dark rounded overflow-hidden shadow-lg m-4">
           <img
             className="w-full h-40  object-cover"
@@ -43,7 +43,7 @@ const Page = () => {
             alt="Savings"
           />
           <div className="px-8 py-7">
-            <div className="font-bold text-xl mb-2">Savings</div>
+            <div className="font-bold text-xl mb-2">Check your Savings</div>
             <p className="text-gray-700 dark:text-gray-300 text-base">Track your daily savings</p>
           </div>
         </div>
