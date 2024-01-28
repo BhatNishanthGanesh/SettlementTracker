@@ -8,6 +8,11 @@ type Expense = {
   spent: number;
 };
 
+type MonthInfo = {
+  month: string;
+  totalForMonth: number;
+};
+
 const useClient = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -45,7 +50,8 @@ const useClient = () => {
 const ExpenseComponent = () => {
   // const [expensesByDate, setExpensesByDate] = useState([]);
   const [expensesByDate, setExpensesByDate] = useState<Expense[]>([]);
-  const [selectedMonth, setSelectedMonth] = useState(null);
+  // const [selectedMonth, setSelectedMonth] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState<MonthInfo | null>(null);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear()); // Default to current year
   const { data: fetchedData, error, fetchExpensesByMonth } = useClient();
   const [hoveredCard, setHoveredCard] = useState(null);
