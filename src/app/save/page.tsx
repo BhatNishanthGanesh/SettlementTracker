@@ -100,36 +100,7 @@ const calculateSavings = (expenses:any, dailyBudget:any) => {
   const calculateTotalSavings = (savings: Array<{ date: string; savings: number }>) => {
     return savings.reduce((total, saving) => total + saving.savings, 0);
   };
-  
 
-//   return (
-//     <div>
-//       {showForm ? (
-//         <form onSubmit={handleFormSubmit}>
-//           <label>
-//             What's your daily budget?
-//             <input
-//               type="number"
-//               value={dailyBudget}
-//               onChange={(e) => setDailyBudget(e.target.value)}
-//             />
-//           </label>
-//           <button type="submit">Submit</button>
-//         </form>
-//       ) : (
-//         <div>
-//           <h2>Your savings so far:</h2>
-//           <ul>
-//             {savings.map((saving: any, index) => (
-//               <li key={index}>
-//                 {saving.date}: ₹{saving.savings}
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-//       )}
-//     </div>
-//   );
 return (
     <div className="container mx-auto mt-8 p-8">
       {showForm ? (
