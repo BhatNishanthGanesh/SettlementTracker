@@ -1,0 +1,20 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "app/**/*",
+        "use": "@now/next"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "/app/api/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/app/$1"
+      }
+    ]
+  }
+  
