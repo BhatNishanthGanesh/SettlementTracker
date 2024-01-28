@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Trash2, Edit } from 'react-feather';
 
-
+// fetch all content in tablw
 async function getData() {
   const res = await fetch("http://localhost:3000/api/posts", { cache: 'no-store' });
 
@@ -74,7 +74,7 @@ export default function Home() {
     
         const updatedData = {
           name: updatedName,
-          expense: updatedExpense, // Assuming expense is supposed to be a string
+          expense: updatedExpense, 
           spent: isNaN(spentValue) ? 0 : spentValue,
           recieved: isNaN(recievedValue) ? 0 : recievedValue,
         };

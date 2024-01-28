@@ -6,20 +6,7 @@ import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 
 const PostComponent = () => {
-  
-  //  const router=useRouter()
-  //  const [searchParams = new URLSearchParams()] = useSearchParams();
-  //  console.log(searchParams);
-   
-  // const dateParam: string | null = searchParams.has('date');
 
-  // Use dateParam in your component logic
-  // console.log('Date parameter:', dateParam);
-   
-  //  const query = router;
-  //  const date  = query;
-
-  
   const [posts, setPosts] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showTaskModal, setTaskShowModal] = useState(false);
@@ -90,7 +77,7 @@ const PostComponent = () => {
   
   const handleChange = (e:any) => {
     const { name, value } = e.target;
-    // const newValue = name === 'spent' || name === 'recieved' ? parseInt(value, 10) : value;
+   
     let newValue;
 
     if (name === 'spent') {
@@ -106,43 +93,11 @@ const PostComponent = () => {
     });
   };
 
-  // const formatDate = (timestamp:any) => {
-  //   const date = new Date(timestamp);
-  //   return date.toISOString().slice(0, 10); // YYYY-MM-DD
-  // };
   
   const formatDate = (timestamp:any) => {
     const date = new Date(timestamp);
     return date.toISOString().slice(0, 10); // YYYY-MM-DD
   };
-
-
-//   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
-
-//   console.log('Current URL:', currentUrl);
-//   const parts = currentUrl.split('/');
-// const date2 = parts[parts.length - 1]; // Extracts the last part of the URL
-
-// console.log('Extracted Date:', date2);
-   
-  // const fetchPosts = async (date2:string) => {
-  //   console.log(date2);
-  //       try {
-  //         const response = await axios.get(`http://localhost:3000/api/expense/day/${date2}`); // Replace with your API endpoint
-  //         console.log(response);
-          
-  //         if (response.status === 200) {
-  //           setPosts(response.data);
-  //         } else {
-  //           console.error('Failed to fetch posts');
-  //         }
-  //       } catch (error) {
-  //         console.error('Error:', error);
-  //       }
-  //       console.log('end',date2)
-  //       const res=await axios.get(`http://localhost:3000/api/expense/day/${date2}`);
-  //       console.log(res.data,'fff')
-  //     };
 
   const fetchPosts = async (date2: string) => {
     setLoading(true);
@@ -165,69 +120,19 @@ const PostComponent = () => {
   useEffect(() => {
     const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
     const parts = currentUrl.split('/');
-    const date2 = parts[parts.length - 1]; // Extracts the last part of the URL
+    const date2 = parts[parts.length - 1]; 
   
     const formattedDate = date2 ? formatDate(date2) : formatDate(new Date());
-    // fetchPosts(formattedDate);
     const fetchPostsTimeout = setTimeout(() => {
       fetchPosts(formattedDate);
     }, 2000);
 
     return () => clearTimeout(fetchPostsTimeout);
-  }, []); // Empty dependency array ensures this effect runs only once on mount
-  
-
-      // useEffect(() => {
-      //   const { date } = searchParams;
-        
-      //   console.log(date+"searchParams");
-      //   const formattedDate = date ? formatDate(date) : formatDate(new Date());
-      //   fetchPosts(formattedDate);
-      // }, [searchParams]);
-    
+  }, []); 
 
 
-      // useEffect(() => {
-      //   // @ts-ignore
-      //   fetchPosts();
-      // }, []);
-      // useEffect(() => {
-      //   if (!router) return; // Handle case where router is not yet available
-      //   const { query } = router as any;
-      //   const date = query?.date || formatDate(Date);
-      //   fetchPosts(date);
-      // }, [router]);
-        
-      //   const fetchPosts = async () => {
-      //     const { date } = router.query; // Destructure the query object to get 'date'
-          
-      //     if (date) {
-      //       try {
-      //         const response = await axios.get(`http://localhost:3000/api/expense?date=${date}`);
-      //         if (response.status === 200) {
-      //           const filteredPosts = response.data.filter((post:any) => {
-      //             const createdAtDate = new Date(post.createdAt).toLocaleDateString();
-      //             console.log(createdAtDate);
-                  
-      //             return createdAtDate === date; // Check if post's date matches the URL date
-      //           });
-      //           setPosts(filteredPosts);
-      //         } else {
-      //           console.error('Failed to fetch posts');
-      //         }
-      //       } catch (error) {
-      //         console.error('Error:', error);
-      //       }
-      //     }
-      //   };
-        
-      
-    
-  
   const handleSubmit = async (e:any) => {
     e.preventDefault();
-    
-
     try {
       const res = await axios.post('http://localhost:3000/api/expense', formData);
 
@@ -235,21 +140,16 @@ const PostComponent = () => {
         throw new Error('Failed to add data');
       } else {
         console.log('Data added successfully:', res.data);
-
-        // Clear the form after successful submission
         setFormData({
           name: '',
           description: '',
           spent:'',
         });
         setShowModal(false)
-        // router.push('/');
-        // redirect('/')
         
       }
     } catch (error) {
       console.error('Error while adding data:', error);
-      // Display error message in UI or handle it as needed
     }
   };
   return (

@@ -25,7 +25,7 @@ function Calculator() {
   const handleKeyDown = (event:any) => {
     const { key } = event;
     if (key === 'Backspace') {
-      setExpression((prevExp) => prevExp.slice(0, -1)); // Remove the last character
+      setExpression((prevExp) => prevExp.slice(0, -1)); 
     } else if (key === 'Enter') {
       handleSubmit('=');
     } else if (key.match(/[0-9+\-*/.=]/)) {
@@ -55,7 +55,7 @@ function Calculator() {
   //   }
   // };
   const handleSubmit = (value:any) => {
-    const maxLength = 10; // Maximum length for the expression and result
+    const maxLength = 10; 
   
     if (
       (expression.length >= maxLength || result.length >= maxLength) &&
@@ -63,7 +63,7 @@ function Calculator() {
       value !== 'DEL' &&
       value !== '='
     ) {
-      // Limit the expression and result length
+     
       return;
     }
   
@@ -106,7 +106,7 @@ function Calculator() {
     '4', '5', '6', '*',
     '1', '2', '3', '-',
     '0', '.', '=', '+',
-    'C', 'DEL' // Added backspace button
+    'C', 'DEL' 
   ];
 
   return (

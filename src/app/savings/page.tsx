@@ -45,7 +45,7 @@ const SavingsPage = () => {
         const totals = data.reduce(
           (acc: { spent: number; received: number }, item: any) => {
             acc.spent += parseFloat(item.spent);
-            acc.received += parseFloat(item.recieved); // Ensure the field name is 'recieved'
+            acc.received += parseFloat(item.recieved); 
             return acc;
           },
           { spent: 0, received: 0 }
@@ -69,7 +69,7 @@ const SavingsPage = () => {
     };
   
     const calculateRemainingBalance = (value: string) => {
-      const cleanedValue = value.replace(/[^\d.]/g, ''); // Remove non-numeric characters
+      const cleanedValue = value.replace(/[^\d.]/g, ''); 
       const budget = parseFloat(cleanedValue);
       if (!isNaN(budget)) {
         setRemainingBalance(budget - totalSpent + totalReceived);
@@ -79,31 +79,6 @@ const SavingsPage = () => {
     };
   
   
-  //       setTotalSavings(totals.savings);
-  //       setTotalProfit(totals.profit);
-  //       setTotalLoss(totals.loss);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-  // const handleBudgetInputChange = (e:any) => {
-  //   setInputBudget(e.target.value);
-  // };
-
-  // const pieChartData = {
-  //   labels: ['Savings', 'Profit', 'Loss'],
-  //   datasets: [
-  //     {
-  //       data: [totalSavings, totalProfit, totalLoss],
-  //       backgroundColor: ['#36A2EB', '#33FF33', '#FF6347'],
-  //       hoverBackgroundColor: ['#36A2EB', '#33FF33', '#FF6347'],
-  //     },
-  //   ],
-  // };
-
   return (
     <div className="flex flex-col items-center mt-8 h-screen">
       <h1 className="text-4xl mb-8 dark:text-white font-bold">Financial Summary</h1>
@@ -131,11 +106,6 @@ const SavingsPage = () => {
           <p className="text-8xl mt-24">{remainingBalance}</p>
         </div>
       </div>
-      {/* Pie Chart */}
-      {/* <div className="mt-8 w-full max-w-6xl">
-        <h2 className="text-2xl mb-4 dark:text-white font-bold">Distribution</h2>
-        <Pie data={pieChartData} />
-      </div> */}
     </div>
   );
 };
