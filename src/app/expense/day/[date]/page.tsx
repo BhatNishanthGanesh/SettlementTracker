@@ -134,8 +134,8 @@ const PostComponent = () => {
   const handleSubmit = async (e:any) => {
     e.preventDefault();
     try {
-      // const res = await axios.post('http://localhost:3000/api/expense', formData);
-      const res = await axios.post('http://settlement-tracker.vercel.app/api/expense', formData);
+      const res = await axios.post('http://localhost:3000/api/expense', formData);
+      // const res = await axios.post('http://settlement-tracker.vercel.app/api/expense', formData);
 
       if (!res.data) {
         throw new Error('Failed to add data');
