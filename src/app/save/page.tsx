@@ -143,7 +143,7 @@ return (
   </div>
 ))}
         </div>
-        <p className='font-bold dark:text-white mt-4'>Total Savings/loses: ₹{calculateTotalSavings(savings).toFixed(2)}</p>
+        <p className='font-bold dark:text-white mt-4'>Total Savings&sol;loses: ₹{calculateTotalSavings(savings).toFixed(2)}</p>
         </>
       )}
     </div>
