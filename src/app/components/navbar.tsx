@@ -43,7 +43,7 @@ const AuthButton = () => {
 
   return (
     <div className="flex items-center">
-      {session?.user?.image && !isFetching ? (
+      {/* {session?.user?.image && !isFetching ? (
         <div className="flex">
           <button onClick={handleAvatarClick} className="focus:outline-none">
             <img
@@ -70,7 +70,44 @@ const AuthButton = () => {
             Sign In
           </button>
         </Link>
+      )} */}
+{session ? (
+  <div className="flex items-center relative">
+    <button onClick={handleAvatarClick} className="focus:outline-none">
+      {session.user?.image ? (
+        <img
+          src={session.user.image}
+          alt="User Avatar"
+          className="w-8 mb-2 h-8 rounded-full mr-2 cursor-pointer"
+        />
+      ) : (
+        <div className="w-8 h-8 bg-red-400 rounded-full flex items-center justify-center mr-2 cursor-pointer">
+          <span className="text-black dark:text-white font-semibold">
+            {session.user?.name?.charAt(0)}
+          </span>
+        </div>
       )}
+    </button>
+    <span className='dark:text-white'>
+      {session.user?.name}
+    </span>
+
+    {showDropdown && (
+      <div className="absolute mt-10 bg-white shadow-md rounded-md p-2">
+        <button onClick={handleSignOut} className="w-full text-left">
+          Sign out
+        </button>
+      </div>
+    )}
+  </div>
+) : (
+  <Link href="/api/auth/signin">
+    <button className=" mb-1.5 dark:bg-white bg-dark dark:text-dark shadow-lg text-white font-bold py-1 px-1 rounded">
+      Sign In
+    </button>
+  </Link>
+)}
+
     </div>
   );
 };

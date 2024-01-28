@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from './components/navbar'
 import './globals.css'
-// import { getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth'
 // import { ClerkProvider } from '@clerk/nextjs'
-// import SessionProvider from "./components/SessionProvider"
-import Authprovider from './components/Authprovider'
+import SessionProvider from "./components/SessionProvider"
+// import Authprovider from './components/Authprovider'
 // import Navmenu from './components/navmenu'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -20,21 +20,21 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // const session = await getServerSession()
+  const session = await getServerSession()
   return (
     <html lang="en">
       <body className={`${inter.className} dark:bg-medium`}>
 
-      {/* <SessionProvider session={session}> */}
-      <Authprovider>
+      <SessionProvider session={session}>
       {/* <ClerkProvider> */}
+      {/* <Authprovider> */}
       <div className=' mx-auto mt-3'>
       <Navbar/>
       {/* <Navmenu/> */}
         {children}
         </div>
-        </Authprovider>
-      {/* </SessionProvider> */}
+        {/* </Authprovider> */}
+      </SessionProvider>
       {/* </ClerkProvider> */}
         </body>
     </html>
