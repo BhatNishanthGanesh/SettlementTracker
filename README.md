@@ -2,7 +2,8 @@
 
 Welcome to my Settlement Tracker web app, where users can keep track of their financial transactions, understand how much they owe or are owed, and manage daily expenses.
 
-![Settlement Tracker](url_to_settlement_tracker_image)
+![Screenshot 2024-01-28 190618](https://github.com/BhatNishanthGanesh/SettlementTracker/assets/102415498/734db9c4-d3ea-433f-a1f8-b4f12d4f008d)
+
 
 ## Project Overview
 
