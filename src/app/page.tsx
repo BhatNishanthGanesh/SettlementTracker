@@ -5,7 +5,8 @@ import { Trash2, Edit } from 'react-feather';
 
 // fetch all content in tablw
 async function getData() {
-  const res = await fetch("http://localhost:3000/api/posts", { cache: 'no-store' });
+  // const res = await fetch("http://localhost:3000/api/posts", { cache: 'no-store' });
+  const res = await fetch("http://settlement-tracker.vercel.app/api/posts", { cache: 'no-store' });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -79,7 +80,8 @@ export default function Home() {
           recieved: isNaN(recievedValue) ? 0 : recievedValue,
         };
     
-        const response = await fetch(`http://localhost:3000/api/posts/${selectedItemId}`, {
+        // const response = await fetch(`http://localhost:3000/api/posts/${selectedItemId}`, {
+        const response = await fetch(`http://settlement-tracker.vercel.app/api/posts/${selectedItemId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -115,7 +117,8 @@ export default function Home() {
 
     const deleteItem = async (id: any) => {
       try {
-        const response = await fetch(`http://localhost:3000/api/posts/${id}`, {
+        // const response = await fetch(`http://localhost:3000/api/posts/${id}`, {
+        const response = await fetch(`http://settlement-tracker.vercel.app/api/posts/${id}`, {
           method: 'DELETE',
         });
   
@@ -133,7 +136,8 @@ export default function Home() {
       try {
         // Loop through selected items and delete them
         await Promise.all(selectedItems.map(async (id) => {
-          const response = await fetch(`http://localhost:3000/api/posts/${id}`, {
+          // const response = await fetch(`http://localhost:3000/api/posts/${id}`, {
+          const response = await fetch(`http://settlement-tracker.vercel.app/api/posts/${id}`, {
             method: 'DELETE',
           });
   

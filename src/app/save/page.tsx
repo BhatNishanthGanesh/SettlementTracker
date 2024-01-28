@@ -49,7 +49,8 @@ let meow=0;
       setShowForm(false);
       // Move the fetchExpenses logic here
       try {
-        const response = await axios.get('http://localhost:3000/api/expense');
+        // const response = await axios.get('http://localhost:3000/api/expense');
+        const response = await axios.get('http://settlement-tracker.vercel.app/api/expense');
         const expenses = response.data;
         console.log(expenses);
         
