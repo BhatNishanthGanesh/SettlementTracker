@@ -35,8 +35,8 @@ const useClient = () => {
 
   const fetchExpensesByMonth = async ({ monthNumber, year }: { monthNumber: number; year: number }) => {
     try {
-      const url = `http://localhost:3000/api/expense/month?month=${monthNumber + 1}&year=${year}`;
-      // const url = `http://settlement-tracker.vercel.app/api/expense/month?month=${monthNumber + 1}&year=${year}`;
+      // const url = `http://localhost:3000/api/expense/month?month=${monthNumber + 1}&year=${year}`;
+      const url = `http://settlement-gold.vercel.app/api/expense/month?month=${monthNumber + 1}&year=${year}`;
       await fetchData(url);
       
     } catch (error: any) {
