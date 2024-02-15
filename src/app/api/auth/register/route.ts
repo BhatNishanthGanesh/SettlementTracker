@@ -100,7 +100,7 @@ import { connectToDb } from "../../../../helpers/server-helpers";
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 
-export const POST = async (request: any) => {
+export const POST = async (request:Request) => {
   const { name, email, password } = await request.json();
 
   await connectToDb();

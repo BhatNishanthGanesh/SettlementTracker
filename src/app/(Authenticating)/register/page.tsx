@@ -244,7 +244,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router"; // Use next/router instead of next/navigation
+import { useRouter } from "next/navigation"; // Use next/router instead of next/navigation
 import { useSession } from "next-auth/react";
 import axios from "axios"; // Import Axios
 

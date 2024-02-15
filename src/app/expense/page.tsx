@@ -1,8 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
+import Navbar from '../components/navbar';
 
 const Page = () => {
   return (
+    <>
+    <Navbar/>
     <div className="flex dark:text-white flex-wrap mt-10 justify-center">
       {/* Daily Expenses Card */}
       <Link href="/expense/day">
@@ -49,6 +52,7 @@ const Page = () => {
         </div>
       </Link>
     </div>
+    </>
   );
 };
 

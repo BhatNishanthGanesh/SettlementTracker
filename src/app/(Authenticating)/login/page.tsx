@@ -92,11 +92,11 @@ const Login = () => {
   // const session = useSession();
   const { data: session, status: sessionStatus } = useSession();
 
-  useEffect(() => {
-    if (sessionStatus === "authenticated") {
-      router.replace("/");
-    }
-  }, [sessionStatus, router]);
+  // useEffect(() => {
+  //   if (sessionStatus === "authenticated") {
+  //     router.replace("/");
+  //   }
+  // }, [sessionStatus, router]);
 
   // const isValidEmail = (email: string) => {
   //   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -139,7 +139,7 @@ const Login = () => {
   }
 
   return (
-    sessionStatus !== "authenticated" && (
+      sessionStatus !== "authenticated" && (
       <div className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="bg-slate-300 p-8 rounded shadow-md w-96">
           <h1 className="text-4xl text-center font-semibold mb-8">Login</h1>
@@ -183,6 +183,7 @@ const Login = () => {
         </div>
       </div>
     )
+    
   );
 };
 

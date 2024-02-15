@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import Navbar from '../components/navbar';
 
 type Expense = {
   id: string;
@@ -35,8 +36,8 @@ const useClient = () => {
 
   const fetchExpensesByMonth = async ({ monthNumber, year }: { monthNumber: number; year: number }) => {
     try {
-      // const url = `http://localhost:3000/api/expense/month?month=${monthNumber + 1}&year=${year}`;
-      const url = `http://settlement-gold.vercel.app/api/expense/month?month=${monthNumber + 1}&year=${year}`;
+      const url = `http://localhost:3000/api/expense/month?month=${monthNumber + 1}&year=${year}`;
+      // const url = `http://settlement-gold.vercel.app/api/expense/month?month=${monthNumber + 1}&year=${year}`;
       await fetchData(url);
       
     } catch (error: any) {
@@ -104,6 +105,8 @@ const ExpenseComponent = () => {
   
 
   return (
+    <>
+    <Navbar/>
     <div className="p-4">
       <h1 className='text-5xl text-center sm:text-1xl md:text-2xl lg:text-5xl mb-4'>Monthly expenses</h1>
       <div className='flex items-center justify-between'>
@@ -179,8 +182,7 @@ const ExpenseComponent = () => {
 
         </div>
       </div>
-
-    // </div>
+    </>
   );
 };
 

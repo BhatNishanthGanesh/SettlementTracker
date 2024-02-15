@@ -179,6 +179,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
+import Navbar from '../components/navbar';
 
 const PostComponent = () => {
   const router = useRouter();
@@ -212,8 +213,8 @@ const PostComponent = () => {
     e.preventDefault();
 
     try {
-      // const res = await axios.post('http://localhost:3000/api/posts', formData);
-      const res = await axios.post('http://settlement-gold.vercel.app/api/posts', formData);
+      const res = await axios.post('http://localhost:3000/api/posts', formData);
+      // const res = await axios.post('http://settlement-gold.vercel.app/api/posts', formData);
 
       if (!res.data) {
         throw new Error('Failed to add data');
@@ -249,6 +250,8 @@ const PostComponent = () => {
     inputStyles['boxShadow'] = '5px 5px 10px #d4d4d4, -5px -5px 10px #ffffff';
   }
   return (
+    <>
+    <Navbar/>
     <div className={`flex justify-center ${theme === 'dark' ? 'dark:bg-dark' : ''} items-center mt-8`}>
       <div className="max-w-md mx-auto ">
         <form onSubmit={handleSubmit} className={` ${theme === 'dark' ? '' : 'bg-gray-100'} border-4 border-gray-100 shadow-lg rounded px-8 pt-6 pb-6 mb-4`}>
@@ -315,6 +318,7 @@ const PostComponent = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

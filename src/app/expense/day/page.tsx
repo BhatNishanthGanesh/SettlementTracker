@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Navbar from '@/app/components/navbar';
 
 const ExpenseCard = ({ date }: any) => {
   const formattedDate = new Date(date).toLocaleDateString('en-US', {
@@ -47,6 +48,8 @@ const ExpensePage = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="p-8">
       <button
         onClick={createExpenseCard}
@@ -60,6 +63,7 @@ const ExpensePage = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

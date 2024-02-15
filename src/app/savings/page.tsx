@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { Pie } from 'react-chartjs-2';
+import Navbar from '../components/navbar';
+// import { Pie } from 'react-chartjs-2';
 
 const SavingsPage = () => {
   // const [totalSavings, setTotalSavings] = useState<number>(0);
@@ -81,6 +82,8 @@ const SavingsPage = () => {
   
   
   return (
+    <>
+     <Navbar/>
     <div className="flex flex-col items-center mt-8 h-screen">
       <h1 className="text-4xl mb-8 dark:text-white font-bold">Financial Summary</h1>
       <input
@@ -108,6 +111,7 @@ const SavingsPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

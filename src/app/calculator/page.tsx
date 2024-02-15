@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import Navbar from '../components/navbar';
 
 function Calculator() {
   // @ts-ignore
@@ -110,6 +111,8 @@ function Calculator() {
   ];
 
   return (
+    <>
+    <Navbar/>
     <main className="flex min-h-screen dark:bg-dark bg-gray-200 justify-center items-center py-8">
       <div className="flex flex-col md:flex-row w-full md:w-auto md:max-w-4xl">
         <div className="bg-gray-900 p-4 rounded-lg shadow-lg mb-4 md:mb-0 md:mr-4 md:w-3/5">
@@ -155,6 +158,7 @@ function Calculator() {
         </div>
       </div>
     </main>
+    </>
   );
 }
 

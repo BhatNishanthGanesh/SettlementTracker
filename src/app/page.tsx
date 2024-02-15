@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Trash2, Edit } from 'react-feather';
+import Navbar from './components/navbar';
 
 // fetch all content in tablw
 async function getData() {
@@ -211,6 +212,8 @@ export default function Home() {
       );
     };
   return (
+    <>
+    <Navbar/>
     <main className="items-center justify-between p-9">
       <h1 className="text-4xl mb-4 text-center dark:text-white font-bold">Settlement Tracker</h1>
       <div className="flex justify-center items-center mb-4">
@@ -327,5 +330,6 @@ export default function Home() {
         </div>
       )}
     </main>
+    </>
   );
 }
