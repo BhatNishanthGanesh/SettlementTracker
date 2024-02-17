@@ -12,11 +12,13 @@ const Login = () => {
   // const session = useSession();
   const { data: session, status: sessionStatus } = useSession();
 
-  useEffect(() => {
-    if (sessionStatus === "authenticated") {
-      router.replace("/");
-    }
-  }, [sessionStatus, router]);
+  // useEffect(() => {
+  //   if (sessionStatus === "authenticated") {
+  //     router.replace("/");
+  //   }else{
+
+  //   }
+  // }, [sessionStatus, router]);
 
   const handleTogglePassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
