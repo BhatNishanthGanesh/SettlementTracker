@@ -215,12 +215,22 @@ const PostComponent = () => {
     try {
       // const res = await axios.post('http://localhost:3000/api/posts', formData);
       // const res = await axios.post('http://settlement-gold.vercel.app/api/posts', formData);
-      const res = await axios.post('http://nimble-kitten-31c037.netlify.app/api/posts', formData);
-
-      if (!res.data) {
-        throw new Error('Failed to add data');
+      // const res = await axios.post('http://nimble-kitten-31c037.netlify.app/api/posts', formData);
+      const res = await fetch('/api/posts', {
+        method: 'POST',
+        //@ts-ignore
+        body: formData,
+        // Headers, if needed:
+        // headers: {
+        //   'Content-Type': 'application/json',
+        //   'Authorization': 'Bearer yourAccessToken',
+        // },
+      });
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
       } else {
-        console.log('Data added successfully:', res.data);
+        const data = await res.json();
+        console.log('Data added successfully:', data);
 
         // Clear the form after successful submission
         setFormData({
