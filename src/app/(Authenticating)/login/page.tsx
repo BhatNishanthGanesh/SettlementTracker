@@ -44,6 +44,10 @@ const Login = () => {
     //   setError("Password is invalid");
     //   return;
     // }
+    // if (sessionStatus === "authenticated") {
+    //   router.replace("/");
+    //   return;
+    // }
 
     const res = await signIn("credentials", {
       redirect: false,
@@ -81,9 +85,9 @@ const Login = () => {
   if (sessionStatus === "loading") {
     return <h1>Loading...</h1>;
   }
-  
+
   return (
-    sessionStatus !== "authenticated" ? (
+    sessionStatus !== "authenticated" && (
       <>
         <div className="bg-black mt-[-10px]">
           <div className="flex flex-col  md:flex-row items-center justify-center min-h-screen">
@@ -145,8 +149,14 @@ const Login = () => {
               <div className="justify-between  flex">
                 <button
                   className=" text-white py-2 pl-12 rounded "
-                  onClick={() => {
-                    signIn("github");
+                  // onClick={() => {
+                  //   signIn("github");
+                  // }}
+                  onClick={async () => {
+                    await signIn("github", {
+                      redirect: false,
+                      callbackUrl: "/", // Adjust the callbackUrl based on your requirements
+                    });
                   }}
                 >
                   <img
@@ -158,8 +168,14 @@ const Login = () => {
                 </button>
                 <button
                   className=" text-white py-2 pr-12  rounded-full"
-                  onClick={() => {
-                    signIn("google");
+                  // onClick={() => {
+                  //   signIn("google");
+                  // }}
+                  onClick={async () => {
+                    await signIn("google", {
+                      redirect: false,
+                      callbackUrl: "/", // Adjust the callbackUrl based on your requirements
+                    });
                   }}
                 >
                   <img
@@ -181,15 +197,8 @@ const Login = () => {
           </div>
         </div>
       </>
-    ) :(
-      router.replace("/")
-      ) 
-      
-      
+    )
   );
-  
 };
-
-
 
 export default Login;
