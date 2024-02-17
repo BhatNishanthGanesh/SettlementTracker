@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 // import { useRouter,useSearchParams } from 'next/navigation';
 // import Image from 'next/image';
 
-import axios from "axios";
 import Navbar from "@/app/components/navbar";
 
 const PostComponent = () => {

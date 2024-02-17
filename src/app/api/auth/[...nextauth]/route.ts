@@ -54,7 +54,6 @@ const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_ID || "",
       clientSecret: process.env.GITHUB_SECRET || "",
-      
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -76,13 +75,11 @@ const authOptions: NextAuthOptions = {
         account.provider === "github" ||
         account.provider === "google"
       ) {
-        
         return true;
       }
       if (account?.provider === "github") {
         await connectToDb();
         try {
-    
           return true;
         } catch (err) {
           console.error("Error saving user:", err);
