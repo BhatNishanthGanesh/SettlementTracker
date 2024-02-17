@@ -49,6 +49,7 @@ const Login = () => {
       redirect: false,
       email,
       password,
+      callbackUrl: "/",
     });
 
     if (res?.error) {
@@ -79,6 +80,10 @@ const Login = () => {
 
   if (sessionStatus === "loading") {
     return <h1>Loading...</h1>;
+  }
+
+  if (sessionStatus === "authenticated") {
+    router.replace("/");
   }
 
   return (
