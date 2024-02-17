@@ -22,10 +22,11 @@ const SavingsTracker = () => {
         // const response = await axios.get("http://nimble-kitten-31c037.netlify.app/api/expense");
         const response = await fetch("/api/expense");
         if (!response.ok) {
-          throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+          throw new Error(
+            `Failed to fetch data: ${response.status} ${response.statusText}`
+          );
         }
 
-        
         const expenses = response.json();
         console.log(expenses);
 
@@ -66,10 +67,19 @@ const SavingsTracker = () => {
         // const response = await axios.get(
         //   "http://settlement-gold.vercel.app/api/expense"
         // );
-        const response = await axios.get(
-          "http://nimble-kitten-31c037.netlify.app/api/expense"
-        );
-        const expenses = response.data;
+        // const response = await axios.get(
+        //   "http://nimble-kitten-31c037.netlify.app/api/expense"
+        // );
+   
+        // const expenses = response.data;
+
+        const response = await fetch("/api/expense");
+  
+        if (!response.ok) {
+          throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+        }
+      
+        const expenses = await response.json();
         console.log(expenses);
 
         console.log(budget);
@@ -130,66 +140,67 @@ const SavingsTracker = () => {
 
   return (
     <>
-    <Navbar/>
-    <div className="container mx-auto mt-8 p-8">
-      {showForm ? (
-        <form
-          onSubmit={handleFormSubmit}
-          className="max-w-md mx-auto bg-white p-8 rounded shadow-lg"
-        >
-          <label className="block mb-4">
-            What is your daily budget?
-            <input
-              type="number"
-              value={dailyBudget}
-              onChange={(e) => setDailyBudget(e.target.value)}
-              className="w-full border p-2 mt-2"
-              min={1}
-            />
-          </label>
-          <button
-            type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded"
+      <Navbar />
+      <div className="container mx-auto mt-8 p-8">
+        {showForm ? (
+          <form
+            onSubmit={handleFormSubmit}
+            className="max-w-md mx-auto bg-white p-8 rounded shadow-lg"
           >
-            Submit
-          </button>
-        </form>
-      ) : (
-        <>
-          <h1 className="text-center text-5xl font-mono dark:text-white">
-            Savings
-          </h1>
-          <p className="font-bold dark:text-white mb-2">
-            Budget for a day: {dailyBudget}
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {/* {savings.map((saving: any, index) => (
+            <label className="block mb-4">
+              What is your daily budget?
+              <input
+                type="number"
+                value={dailyBudget}
+                onChange={(e) => setDailyBudget(e.target.value)}
+                className="w-full border p-2 mt-2"
+                min={1}
+              />
+            </label>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 px-4 rounded"
+            >
+              Submit
+            </button>
+          </form>
+        ) : (
+          <>
+            <h1 className="text-center text-5xl font-mono dark:text-white">
+              Savings
+            </h1>
+            <p className="font-bold dark:text-white mb-2">
+              Budget for a day: {dailyBudget}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              {/* {savings.map((saving: any, index) => (
             <div key={index} className="bg-white p-4 rounded shadow-lg ">
               <h2 className="text-xl font-semibold mb-2">{saving.date}</h2>
               <p>₹{saving.savings.toFixed(2)}</p>
             </div>
           ))} */}
-            {savings.map((saving, index) => (
-              <div
-                key={index}
-                className={`bg-white dark:text-white dark:bg-medium p-4 rounded ${
-                  hoveredCard === index ? "" : "shadow-lg"
-                } transition-shadow duration-300`}
-                // @ts-ignore
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <h2 className="text-xl font-semibold mb-2">{saving.date}</h2>
-                <p>₹{saving.savings.toFixed(2)}</p>
-              </div>
-            ))}
-          </div>
-          <p className="font-bold dark:text-white mt-4">
-            Total Savings or loses: ₹{calculateTotalSavings(savings).toFixed(2)}
-          </p>
-        </>
-      )}
-    </div>
+              {savings.map((saving, index) => (
+                <div
+                  key={index}
+                  className={`bg-white dark:text-white dark:bg-medium p-4 rounded ${
+                    hoveredCard === index ? "" : "shadow-lg"
+                  } transition-shadow duration-300`}
+                  // @ts-ignore
+                  onMouseEnter={() => setHoveredCard(index)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  <h2 className="text-xl font-semibold mb-2">{saving.date}</h2>
+                  <p>₹{saving.savings.toFixed(2)}</p>
+                </div>
+              ))}
+            </div>
+            <p className="font-bold dark:text-white mt-4">
+              Total Savings or loses: ₹
+              {calculateTotalSavings(savings).toFixed(2)}
+            </p>
+          </>
+        )}
+      </div>
     </>
   );
 };
