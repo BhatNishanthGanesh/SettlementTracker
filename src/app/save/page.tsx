@@ -19,9 +19,14 @@ const SavingsTracker = () => {
     const fetchExpenses = async () => {
       try {
         // const response = await axios.get("http://localhost:3000/api/expense");
-        const response = await axios.get("http://nimble-kitten-31c037.netlify.app/api/expense");
+        // const response = await axios.get("http://nimble-kitten-31c037.netlify.app/api/expense");
+        const response = await fetch("/api/expense");
+        if (!response.ok) {
+          throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+        }
+
         
-        const expenses = response.data;
+        const expenses = response.json();
         console.log(expenses);
 
         // Calculate savings for each day based on createdAt timings
