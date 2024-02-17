@@ -221,10 +221,9 @@ const PostComponent = () => {
         //@ts-ignore
         body: formData,
         // Headers, if needed:
-        // headers: {
-        //   'Content-Type': 'application/json',
-        //   'Authorization': 'Bearer yourAccessToken',
-        // },
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
