@@ -39,10 +39,17 @@ const PostComponent = () => {
       // const response = await axios.delete(
       //   `https://settlement-gold.vercel.app/api/expense/${postId}`
       // );
-      const response = await axios.delete(
-        `http://nimble-kitten-31c037.netlify.app/api/expense/${postId}`
-      );
-      if (response.status === 200) {
+      // const response = await axios.delete(
+      //   `http://nimble-kitten-31c037.netlify.app/api/expense/${postId}`
+      // );
+      const response = await fetch(`/api/expense/${postId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
         // @ts-ignore
         fetchPosts();
         console.log("Post deleted successfully!");
@@ -74,11 +81,18 @@ const PostComponent = () => {
       //   `http://settlement-gold.vercel.app/api/expense/${selectedPost}`,
       //   updateData
       // );
-      const response = await axios.patch(
-        `http://nimble-kitten-31c037.netlify.app/api/expense/${selectedPost}`,
-        updateData
-      );
-      if (response.status === 200) {
+      // const response = await axios.patch(
+      //   `http://nimble-kitten-31c037.netlify.app/api/expense/${selectedPost}`,
+      //   updateData
+      // );
+      const response = await fetch(`/api/expense/${selectedPost}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updateData),
+      });
+      if (response.ok) {
         //@ts-ignore
         fetchPosts();
         setTaskShowModal(false);
@@ -124,12 +138,16 @@ const PostComponent = () => {
       // const response = await axios.get(
       //   `http://settlement-gold.vercel.app/api/expense/day/${date2}`
       // );
-      const response = await axios.get(
-        `http://nimble-kitten-31c037.netlify.app/api/expense/day/${date2}`
-      );
+      // const response = await axios.get(
+      //   `http://nimble-kitten-31c037.netlify.app/api/expense/day/${date2}`
+      // );
+      const response = await fetch(`/api/expense/day/${date2}`);
       console.log("Response:", response);
-      if (response.status === 200) {
-        setPosts(response.data);
+      if (response.ok) {
+        // setPosts(response.data);
+        const data = await response.json();
+        console.log("Response:", data);
+        setPosts(data);
       } else {
         console.error("Failed to fetch posts");
       }
@@ -165,21 +183,41 @@ const PostComponent = () => {
       //   "http://settlement-gold.vercel.app/api/expense",
       //   formData
       // );
-      const res = await axios.post(
-        "http://nimble-kitten-31c037.netlify.app/api/expense",
-        formData
-      );
-
-      if (!res.data) {
-        throw new Error("Failed to add data");
-      } else {
-        console.log("Data added successfully:", res.data);
+      // const res = await axios.post(
+      //   "http://nimble-kitten-31c037.netlify.app/api/expense",
+      //   formData
+      // );
+      const response = await fetch('/api/expense', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      // if (!res.data) {
+      //   throw new Error("Failed to add data");
+      // } else {
+      //   console.log("Data added successfully:", res.data);
+      //   setFormData({
+      //     name: "",
+      //     description: "",
+      //     spent: "",
+      //   });
+      //   setShowModal(false);
+      // }
+      if (response.ok) {
+        // Successful response (status code 200)
+        const data = await response.json();
+        console.log("Data added successfully:", data);
         setFormData({
           name: "",
           description: "",
           spent: "",
         });
         setShowModal(false);
+      } else {
+        // Handle non-successful response
+        console.error("Failed to add data");
       }
     } catch (error) {
       console.error("Error while adding data:", error);
