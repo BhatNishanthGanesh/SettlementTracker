@@ -218,8 +218,8 @@ const PostComponent = () => {
       // const res = await axios.post('http://nimble-kitten-31c037.netlify.app/api/posts', formData);
       const res = await fetch('/api/posts', {
         method: 'POST',
-        //@ts-ignore
-        body: formData,
+        body: JSON.stringify(formData),
+        // body: formData,
         // Headers, if needed:
         headers: {
           'Content-Type': 'application/json',
