@@ -176,7 +176,7 @@
 
 'use client'
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import Navbar from '../components/navbar';
@@ -187,7 +187,7 @@ const PostComponent = () => {
     name: '',
     expense: '',
     spent: '',
-    received: '',
+    recieved: '',
   });
 
   const { theme } = useTheme(); // Use next-themes useTheme hook
@@ -196,7 +196,7 @@ const PostComponent = () => {
     const { name, value } = e.target;
     let newValue;
 
-    if (name === 'spent' || name === 'received') {
+    if (name === 'spent' || name === 'recieved') {
       newValue = parseInt(value, 10);
       newValue = newValue < 0 ? 0 : newValue;
     } else {
@@ -225,6 +225,9 @@ const PostComponent = () => {
           'Content-Type': 'application/json',
         },
       });
+      console.log(res);
+      console.log(formData);
+      
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
       } else {
@@ -236,13 +239,14 @@ const PostComponent = () => {
           name: '',
           expense: '',
           spent: '',
-          received: '',
+          recieved: '',
         });
         router.push('/');
       }
     } catch (error) {
       console.error('Error while adding data:', error);
       // Display error message in UI or handle it as needed
+      
     }
   };
 
@@ -311,8 +315,8 @@ const PostComponent = () => {
             <input
               style={inputStyles}
               type="number"
-              name="received"
-              value={formData.received}
+              name="recieved"
+              value={formData.recieved}
               onChange={handleChange}
               required
             />
