@@ -38,8 +38,8 @@ const useClient = () => {
     try {
       // const url = `http://localhost:3000/api/expense/month?month=${monthNumber + 1}&year=${year}`;
       // const url = `http://settlement-gold.vercel.app/api/expense/month?month=${monthNumber + 1}&year=${year}`;
-      const url = `http://nimble-kitten-31c037.netlify.app/api/expense/month?month=${monthNumber + 1}&year=${year}`;
-      await fetchData(url);
+      // const url = `http://nimble-kitten-31c037.netlify.app/api/expense/month?month=${monthNumber + 1}&year=${year}`;
+      await fetchData(`/api/expense/month?month=${monthNumber + 1}&year=${year}`);
       
     } catch (error: any) {
       setError(error.message || 'Error fetching data');
