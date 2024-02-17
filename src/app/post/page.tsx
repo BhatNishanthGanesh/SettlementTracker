@@ -213,8 +213,9 @@ const PostComponent = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:3000/api/posts', formData);
+      // const res = await axios.post('http://localhost:3000/api/posts', formData);
       // const res = await axios.post('http://settlement-gold.vercel.app/api/posts', formData);
+      const res = await axios.post('http://nimble-kitten-31c037.netlify.app/api/posts', formData);
 
       if (!res.data) {
         throw new Error('Failed to add data');

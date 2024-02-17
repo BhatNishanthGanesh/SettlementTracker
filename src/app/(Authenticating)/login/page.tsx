@@ -9,7 +9,6 @@ const Login = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  // const session = useSession();
   const { data: session, status: sessionStatus } = useSession();
 
   // useEffect(() => {
@@ -24,30 +23,11 @@ const Login = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  // const isValidEmail = (email: string) => {
-  //   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  //   return emailRegex.test(email);
-  // };
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const email = e.target[0].value;
     const password = e.target[1].value;
-
-    // if (!isValidEmail(email)) {
-    //   setError("Email is invalid");
-    //   return;
-    // }
-
-    // if (!password || password.length < 2) {
-    //   setError("Password is invalid");
-    //   return;
-    // }
-    // if (sessionStatus === "authenticated") {
-    //   router.replace("/");
-    //   return;
-    // }
 
     const res = await signIn("credentials", {
       redirect: false,
@@ -64,22 +44,6 @@ const Login = () => {
       setError("");
       router.replace("/");
     }
-    // if (res?.error) {
-    //   setError("Invalid email or password");
-    // } else {
-    //   setError("");
-    //   // Check the provider and navigate accordingly
-    //   if (res?.url) {
-    //     if (res.url.includes("github")) {
-    //       signIn("github");
-    //     } else if (res.url.includes("google")) {
-    //       signIn("google");
-    //     } else {
-    //       // If neither GitHub nor Google, navigate to the home page
-    //       router.replace("/");
-    //     }
-    //   }
-    // }
   };
 
   if (sessionStatus === "loading") {
@@ -101,7 +65,6 @@ const Login = () => {
                 <br /> and prosperous journey.
               </h1>
             </div>
-            {/* <div className="flex min-h-screen flex-col items-center justify-between p-24"> */}
             <div
               className="bg-gray-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-800
  p-8 rounded shadow-lg md:w-96"

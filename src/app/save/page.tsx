@@ -55,10 +55,13 @@ const SavingsTracker = () => {
       setShowForm(false);
       // Move the fetchExpenses logic here
       try {
-        const response = await axios.get("http://localhost:3000/api/expense");
+        // const response = await axios.get("http://localhost:3000/api/expense");
         // const response = await axios.get(
         //   "http://settlement-gold.vercel.app/api/expense"
         // );
+        const response = await axios.get(
+          "http://nimble-kitten-31c037.netlify.app/api/expense"
+        );
         const expenses = response.data;
         console.log(expenses);
 

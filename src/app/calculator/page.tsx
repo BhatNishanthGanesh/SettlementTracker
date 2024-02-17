@@ -9,15 +9,6 @@ function Calculator() {
   const [result, setResult] = useState('');
   const [expression, setExpression] = useState('');
 
-
-  // useEffect(() => {
-  //   // Load history from localStorage on component mount
-  //   const storedHistory = localStorage.getItem('calculatorHistory');
-  //   if (storedHistory) {
-  //     setHistory(JSON.parse(storedHistory));
-  //   }
-  // }, []);
-
   useEffect(() => {
     // Update localStorage whenever history changes
     localStorage.setItem('calculatorHistory', JSON.stringify(history));
@@ -34,27 +25,6 @@ function Calculator() {
       handleSubmit(key);
     }
   };
-
-  // const handleSubmit = (value:any) => {
-  //   if (value === '=') {
-  //     try {
-  //       const evalResult = eval(expression).toString();
-  //       setHistory([...history, `${expression} = ${evalResult}`]);
-  //       setResult(evalResult);
-  //       setExpression(evalResult);
-  //     } catch (error) {
-  //       setResult('Error');
-  //     }
-  //   } else if (value === 'C') {
-  //     setHistory([]);
-  //     setExpression('');
-  //     setResult('');
-  //   } else if (value === 'DEL') {
-  //     setExpression((prevExp) => prevExp.slice(0, -1)); // Remove the last character
-  //   } else {
-  //     setExpression((prevExp) => prevExp + value);
-  //   }
-  // };
   const handleSubmit = (value:any) => {
     const maxLength = 10; 
   

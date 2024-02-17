@@ -33,12 +33,15 @@ const PostComponent = () => {
 
   const handleDelete = async (postId: number | string) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:3000/api/expense/${postId}`
-      );
+      // const response = await axios.delete(
+      //   `http://localhost:3000/api/expense/${postId}`
+      // );
       // const response = await axios.delete(
       //   `https://settlement-gold.vercel.app/api/expense/${postId}`
       // );
+      const response = await axios.delete(
+        `http://nimble-kitten-31c037.netlify.app/api/expense/${postId}`
+      );
       if (response.status === 200) {
         // @ts-ignore
         fetchPosts();
@@ -63,14 +66,18 @@ const PostComponent = () => {
 
   const handleUpdatePost = async () => {
     try {
-      const response = await axios.patch(
-        `http://localhost:3000/api/expense/${selectedPost}`,
-        updateData
-      );
+      // const response = await axios.patch(
+      //   `http://localhost:3000/api/expense/${selectedPost}`,
+      //   updateData
+      // );
       // const response = await axios.patch(
       //   `http://settlement-gold.vercel.app/api/expense/${selectedPost}`,
       //   updateData
       // );
+      const response = await axios.patch(
+        `http://nimble-kitten-31c037.netlify.app/api/expense/${selectedPost}`,
+        updateData
+      );
       if (response.status === 200) {
         //@ts-ignore
         fetchPosts();
@@ -111,12 +118,15 @@ const PostComponent = () => {
     setLoading(true);
     console.log("Fetching posts for date:", date2);
     try {
-      const response = await axios.get(
-        `http://localhost:3000/api/expense/day/${date2}`
-      );
+      // const response = await axios.get(
+      //   `http://localhost:3000/api/expense/day/${date2}`
+      // );
       // const response = await axios.get(
       //   `http://settlement-gold.vercel.app/api/expense/day/${date2}`
       // );
+      const response = await axios.get(
+        `http://nimble-kitten-31c037.netlify.app/api/expense/day/${date2}`
+      );
       console.log("Response:", response);
       if (response.status === 200) {
         setPosts(response.data);
@@ -147,14 +157,18 @@ const PostComponent = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/expense",
-        formData
-      );
+      // const res = await axios.post(
+      //   "http://localhost:3000/api/expense",
+      //   formData
+      // );
       // const res = await axios.post(
       //   "http://settlement-gold.vercel.app/api/expense",
       //   formData
       // );
+      const res = await axios.post(
+        "http://nimble-kitten-31c037.netlify.app/api/expense",
+        formData
+      );
 
       if (!res.data) {
         throw new Error("Failed to add data");
