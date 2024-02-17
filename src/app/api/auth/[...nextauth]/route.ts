@@ -246,7 +246,6 @@ const authOptions: NextAuthOptions = {
       id: "credentials",
       name: "Credentials",
       credentials: {
-        name: { label: "name", type: "text", placeholder: "Enter your name.." },
         email: {
           label: "Email",
           type: "email",
@@ -284,6 +283,7 @@ const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_ID || "",
       clientSecret: process.env.GITHUB_SECRET || "",
+      
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -297,10 +297,17 @@ const authOptions: NextAuthOptions = {
     async signIn({ user, account }: { user: AuthUser; account: Account }) {
       console.log("Sign-in callback - User:", user);
       console.log("Sign-in callback - Account:", account);
-      if (account.provider === "credentials") {
+      // if (account.provider === "credentials") {
+      //   return true;
+      // }
+      if (
+        account.provider === "credentials" ||
+        account.provider === "github" ||
+        account.provider === "google"
+      ) {
+        
         return true;
       }
-
       if (account?.provider === "github") {
         await connectToDb();
         try {
@@ -331,6 +338,7 @@ const authOptions: NextAuthOptions = {
           await prisma.$disconnect();
         }
       }
+      return false;
     },
   },
   pages: {

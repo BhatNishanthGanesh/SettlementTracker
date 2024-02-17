@@ -1,102 +1,26 @@
-// "use client";
-
-// import Link from "next/link";
-// import React, { useState } from "react";
-// import { signIn } from "next-auth/react";
-// const Login = () => {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   const submitHandler = async(e:any) => {
-//     e.preventDefault();
-//     try {
-//       const data = await signIn("credentials", {
-//         redirect: false,
-//         email,
-//         password,
-//       });
-
-//       console.log(data);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   return (
-//     <div className="container mx-auto mt-5">
-//       <div className="flex justify-center">
-//         <div className="w-full bg-slate-200 max-w-md">
-//           <form
-//             className="border border-secondary rounded p-4"
-//             onSubmit={submitHandler}
-//           >
-//             <h1 className="mb-4 text-2xl font-bold">Login</h1>
-
-//             <div className="mb-4">
-//               <label htmlFor="email_field" className="block text-sm font-medium text-gray-600">
-//                 Email address
-//               </label>
-//               <input
-//                 type="email"
-//                 id="email_field"
-//                 className="form-input p-2 h-8 mt-1 block w-full border-gray-300 rounded-md"
-//                 placeholder="Enter email address..."
-//                 value={email}
-//                 onChange={(e) => setEmail(e.target.value)}
-//               />
-//             </div>
-
-//             <div className="mb-4">
-//               <label htmlFor="password_field" className="block text-sm font-medium text-gray-600">
-//                 Password
-//               </label>
-//               <input
-//                 type="password"
-//                 id="password_field"
-//                 className="form-input p-2 h-8 mt-1 block w-full border-gray-300 rounded-md"
-//                 value={password}
-//                 placeholder="Enter password..."
-//                 onChange={(e) => setPassword(e.target.value)}
-//               />
-//             </div>
-
-//             <button
-//               type="submit"
-//               className="w-full bg-slate-400 hover:bg-slate-500 text-white py-2 px-4 rounded-md hover:bg-primary-dark focus:outline-none focus:ring focus:border-primary-dark"
-//             >
-//               Sign in
-//             </button>
-
-//             <div className="text-center mt-4">
-//               <p className="text-gray-600">
-//                 Not a member? <Link href="/register"><span className="bg-slate-300 hover:bg-slate-400 rounded cursor-pointer text-sm p-2">Register</span></Link>
-//               </p>
-//             </div>
-//           </form>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Login;
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "react-feather";
 
 const Login = () => {
   const router = useRouter();
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   // const session = useSession();
   const { data: session, status: sessionStatus } = useSession();
 
-  // useEffect(() => {
-  //   if (sessionStatus === "authenticated") {
-  //     router.replace("/");
-  //   }
-  // }, [sessionStatus, router]);
+  useEffect(() => {
+    if (sessionStatus === "authenticated") {
+      router.replace("/");
+    }
+  }, [sessionStatus, router]);
+
+  const handleTogglePassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   // const isValidEmail = (email: string) => {
   //   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -105,33 +29,50 @@ const Login = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const name=e.target[0].value
-    const email = e.target[1].value;
-    const password = e.target[2].value;
+
+    const email = e.target[0].value;
+    const password = e.target[1].value;
 
     // if (!isValidEmail(email)) {
     //   setError("Email is invalid");
     //   return;
     // }
 
-    if (!password || password.length < 2) {
-      setError("Password is invalid");
-      return;
-    }
+    // if (!password || password.length < 2) {
+    //   setError("Password is invalid");
+    //   return;
+    // }
 
     const res = await signIn("credentials", {
       redirect: false,
-      name,
       email,
       password,
     });
 
     if (res?.error) {
       setError("Invalid email or password");
-      if (res?.url) router.replace("/");
+    } else if (res?.url) {
+      router.replace("/");
     } else {
       setError("");
+      router.replace("/");
     }
+    // if (res?.error) {
+    //   setError("Invalid email or password");
+    // } else {
+    //   setError("");
+    //   // Check the provider and navigate accordingly
+    //   if (res?.url) {
+    //     if (res.url.includes("github")) {
+    //       signIn("github");
+    //     } else if (res.url.includes("google")) {
+    //       signIn("google");
+    //     } else {
+    //       // If neither GitHub nor Google, navigate to the home page
+    //       router.replace("/");
+    //     }
+    //   }
+    // }
   };
 
   if (sessionStatus === "loading") {
@@ -139,53 +80,106 @@ const Login = () => {
   }
 
   return (
-      sessionStatus !== "authenticated" && (
-      <div className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="bg-slate-300 p-8 rounded shadow-md w-96">
-          <h1 className="text-4xl text-center font-semibold mb-8">Login</h1>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus:text-black"
-              placeholder="Email"
-              required
-            />
-            <input
-              type="password"
-              className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus:text-black"
-              placeholder="Password"
-              required
-            />
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+    sessionStatus !== "authenticated" && (
+      <>
+        <div className="bg-black mt-[-10px]">
+          <div className="flex flex-col  md:flex-row items-center justify-center min-h-screen">
+            <div className=" leading-8 pr-5">
+              <h1 className="font-bold  md:text-5xl text-3xl text-white text-center md:mr-8 md:mb-8 mb-8">
+                Welcome to Settlement tracker
+                <span className="hidden md:inline-block">👉</span>
+              </h1>
+              <h1 className="text-white text-center text-2xl">
+                Simplifying your finances for a clear
+                <br /> and prosperous journey.
+              </h1>
+            </div>
+            {/* <div className="flex min-h-screen flex-col items-center justify-between p-24"> */}
+            <div
+              className="bg-gray-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-800
+ p-8 rounded shadow-lg md:w-96"
             >
-              {" "}
-              Sign In
-            </button>
-            <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
-          </form>
-          <button
-            className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
-            onClick={() => {
-              signIn("github");
-            }}
-          >
-            Sign In with Github
-          </button>
-          <div className="text-center text-gray-500 mt-4">- OR -</div>
-          <Link
-            className="block text-center text-blue-500 hover:underline mt-2"
-            href="/register"
-          >
-            Register Here
-          </Link>
+              <h1 className="text-4xl text-center text-white font-semibold mb-8">
+                Login
+              </h1>
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus:text-black"
+                  placeholder="Email"
+                  name="email"
+                  required
+                />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus:text-black"
+                  placeholder="Password"
+                  name="password"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={handleTogglePassword}
+                  className="absolute right-[40px] mt-3"
+                >
+                  {showPassword ? (
+                    <Eye size={20} color="#718096" />
+                  ) : (
+                    <EyeOff size={20} color="#718096" />
+                  )}
+                </button>
+                <button
+                  type="submit"
+                  className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+                >
+                  {" "}
+                  Sign In
+                </button>
+                <p className="text-red-600 text-[16px] mb-4">
+                  {error && error}
+                </p>
+              </form>
+              <div className="justify-between  flex">
+                <button
+                  className=" text-white py-2 pl-12 rounded "
+                  onClick={() => {
+                    signIn("github");
+                  }}
+                >
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQN0Uu0auB-_30X62d-vUYM-jhN4TkqPqgv6A&usqp=CAU"
+                    alt="GitHub Logo"
+                    className="w-10 h-10 "
+                  />
+                  {/* Sign In with Github */}
+                </button>
+                <button
+                  className=" text-white py-2 pr-12  rounded-full"
+                  onClick={() => {
+                    signIn("google");
+                  }}
+                >
+                  <img
+                    src="https://cdn.iconscout.com/icon/free/png-256/free-google-160-189824.png"
+                    alt="Google Logo"
+                    className=" w-8 h-8"
+                  />
+                  {/* Sign In with Google */}
+                </button>
+              </div>
+              <div className="text-center text-gray-500 mt-4">- OR -</div>
+              <Link
+                className="block font-bold text-center text-blue-500 hover:underline mt-2"
+                href="/register"
+              >
+                Register Here
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
+      </>
     )
-    
   );
 };
 
 export default Login;
-
