@@ -81,13 +81,9 @@ const Login = () => {
   if (sessionStatus === "loading") {
     return <h1>Loading...</h1>;
   }
-
-  if (sessionStatus === "authenticated") {
-    router.replace("/");
-  }
-
+  
   return (
-    sessionStatus !== "authenticated" && (
+    sessionStatus !== "authenticated" ? (
       <>
         <div className="bg-black mt-[-10px]">
           <div className="flex flex-col  md:flex-row items-center justify-center min-h-screen">
@@ -185,8 +181,15 @@ const Login = () => {
           </div>
         </div>
       </>
-    )
+    ) :(
+      router.replace("/")
+      ) 
+      
+      
   );
+  
 };
+
+
 
 export default Login;
