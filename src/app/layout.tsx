@@ -27,7 +27,7 @@ export default async function RootLayout({
         {/* <link rel="icon" href="/favicon.ico" sizes="any" /> */}
         <link
           rel="icon"
-          href="https://media.istockphoto.com/id/1296117554/vector/finance-management-rgb-color-icon.jpg?s=612x612&w=0&k=20&c=xmx_1sMrNg_Z1JC6jFyES5ecw8NZ5Tvm6p3LH9vN-vg="
+          href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqI6Vmc5PPlM0kYwvRofV_7pKxIpLvW1it-Q&usqp=CAU"
           type="image/jpg"
           sizes="612x612"
         />
@@ -36,7 +36,7 @@ export default async function RootLayout({
         <SessionProvider session={session}>
           {/* <ClerkProvider> */}
           {/* <Authprovider> */}
-          <div className=" mx-auto mt-3">
+          <div className=" mx-auto ">
             {/* <Navbar/> */}
             {/* <Navmenu/> */}
             {children}

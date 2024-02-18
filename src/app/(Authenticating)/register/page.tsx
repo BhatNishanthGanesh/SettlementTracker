@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import axios from "axios"; 
+import axios from "axios";
 import { Eye, EyeOff } from "react-feather";
 
 const Register = () => {
@@ -48,7 +48,7 @@ const Register = () => {
       //@ts-ignore
       if (error.response && error.response.status === 400) {
         // @ts-ignore
-        const errorData = error.response.data; 
+        const errorData = error.response.data;
         setError(errorData.message || "This email is already registered");
       } else {
         setError("Error, try again");
@@ -63,8 +63,8 @@ const Register = () => {
 
   return (
     sessionStatus !== "authenticated" && (
-      <div className="flex bg-black min-h-screen flex-col items-center justify-between p-24">
-        <div className="bg-[#212121] p-8 rounded shadow-md w-96">
+      <div className="flex bg-black  min-h-screen flex-col items-center justify-between p-24 ">
+        <div className="bg-[#212121] p-8 rounded shadow-md md:w-96 w-80">
           <h1 className="text-4xl text-center text-white font-semibold mb-8">
             Register
           </h1>
@@ -93,7 +93,7 @@ const Register = () => {
             <button
               type="button"
               onClick={handleTogglePassword}
-              className="absolute md:inset-y-0 md:right-[38rem] mt-2  items-center"
+              className="absolute md:inset-y-0 md:right-[39rem] md:mb-[2rem] right-[4.3rem] mt-[0.9rem] items-center"
             >
               {showpassword ? (
                 <Eye size={20} color="#718096" />
