@@ -56,17 +56,17 @@ const Login = () => {
         <div className="bg-black mt-[-10px]">
           <div className="flex flex-col  md:flex-row items-center justify-center min-h-screen">
             <div className=" leading-8 pr-5">
-              <h1 className="font-bold  md:text-5xl text-3xl text-white text-center md:mr-8 md:mb-8 mb-8">
+              <h1 className="font-bold  md:text-5xl text-2xl text-white text-center md:mr-8 md:mb-8 mb-8">
                 Welcome to Settlement tracker
                 <span className="hidden md:inline-block">👉</span>
               </h1>
-              <h1 className="text-white text-center text-2xl">
+              <h1 className="text-white text-center mb-4 text-1xl">
                 Simplifying your finances for a clear
                 <br /> and prosperous journey.
               </h1>
             </div>
             <div
-              className="bg-gray-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-800
+              className="bg-gray-100 bg-clip-padding backdrop-filter w-80 backdrop-blur-sm bg-opacity-10 border border-gray-800
  p-8 rounded shadow-lg md:w-96"
             >
               <h1 className="text-4xl text-center text-white font-semibold mb-8">
