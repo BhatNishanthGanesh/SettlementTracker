@@ -53,7 +53,7 @@ const Login = () => {
   return (
     sessionStatus !== "authenticated" && (
       <>
-        <div className="bg-black mt-[-10px]">
+        <div className="bg-black mt-[-10px] p-4">
           <div className="flex flex-col  md:flex-row items-center justify-center min-h-screen">
             <div className=" leading-8 pr-5">
               <h1 className="font-bold  md:text-5xl text-2xl text-white text-center md:mr-8 md:mb-8 mb-8">
