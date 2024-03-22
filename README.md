@@ -26,7 +26,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Technologies Used
 
-nextjs, nextAuth ,tailwind css, prisma with mongodb
+nextjs, nextAuth , typescript , tailwind css, prisma with mongodb
 
 ## Learn More
 
