@@ -4,6 +4,8 @@ Welcome to my Settlement Tracker web app, where users can keep track of their fi
 
 ![Screenshot 2024-01-28 190618](https://github.com/BhatNishanthGanesh/SettlementTracker/assets/102415498/734db9c4-d3ea-433f-a1f8-b4f12d4f008d)
 
+## Video Tour of the website
+[watch the video](https://drive.google.com/file/d/1hP_TCioLhe8lyZ7-tc4b0a_soIZ9ruk9/view?usp=drive_link)
 
 ## Project Overview
 
