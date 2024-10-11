@@ -7,7 +7,7 @@ async function getData() {
   //   cache: "no-store",
   // });
   // const res = await fetch("http://settlement-gold.vercel.app/api/posts", { cache: 'no-store' });
-  const res = await fetch("https://nimble-kitten-31c037.netlify.app/api/posts", { cache: 'no-store' });
+  const res = await fetch("https://settlementtracker.netlify.app/api/posts", { cache: 'no-store' });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
